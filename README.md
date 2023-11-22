@@ -72,3 +72,6 @@ Object-Oriented Programming (OOP) for alerts
 Data visualization tools integrated
 Aiming for ≥ 90% test coverage
 Performance monitoring via online tools
+
+Serverless functions
+In the Meet app, serverless functions will play a crucial role in handling authorization for accessing public calendar events from the Google Calendar API. Users need to be authorized to retrieve event data for rendering in the React app. This authorization is facilitated by serverless functions, which are a more efficient alternative to building and maintaining a full server for this purpose. In this context, serverless functions will generate and provide access tokens, ensuring secure access to the Google Calendar API. AWS Lambda will be the chosen cloud-service provider for implementing these serverless functions, making the app's architecture more scalable and cost-effective.
