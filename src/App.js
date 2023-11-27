@@ -1,4 +1,5 @@
 import "./App.css";
+import EventList from "./components/EventList";
 
 const App = () => {
   return (
