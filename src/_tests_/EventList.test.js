@@ -1,8 +1,14 @@
 import { render } from "@testing-library/react";
 import EventList from "../components/EventList";
-import Event from "../components/Event";
+
+// beforEach function added to EventList tests...
 
 describe("<EventList /> component", () => {
+  let EventListComponent;
+  beforeEach(() => {
+    EventListComponent = render(<EventList />);
+  });
+
   test('has an element with "list" role', () => {
     const EventListComponent = render(<EventList />);
     expect(EventListComponent.queryByRole("list")).toBeInTheDocument();
