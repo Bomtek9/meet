@@ -3,9 +3,18 @@
 import { render } from "@testing-library/react";
 import App from "../App";
 
-describe("renders list of events", () => {
-  test("renders event list", () => {
-    const AppDOM = render(<App />).container.firstChild;
+// test functions with beforeEach; will be executed before each test, within the scope
+describe("<App /> component", () => {
+  let AppDOM;
+  beforeEach(() => {
+    AppDOM = render(<App />).container.firstChild;
+  });
+
+  test("renders list of events", () => {
     expect(AppDOM.querySelector("#event-list")).toBeInTheDocument();
+  });
+
+  test("render CitySearch", () => {
+    expect(AppDOM.querySelector("#city-search")).toBeInTheDocument();
   });
 });
