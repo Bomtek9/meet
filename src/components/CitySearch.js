@@ -1,11 +1,14 @@
-// src/components/CitySearch.js
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const CitySearch = ({ allLocations }) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+
+  useEffect(() => {
+    // Set the initial state of suggestions when allLocations prop changes
+    setSuggestions(allLocations);
+  }, [`${allLocations}`]);
 
   const handleInputChanged = (event) => {
     const value = event.target.value;
