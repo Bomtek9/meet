@@ -1,8 +1,7 @@
-// src/__tests__/CitySearch.test.js
-
-import { render, fireEvent } from "@testing-library/react";
-import CitySearch from "../components/CitySearch";
+import { render, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import CitySearch from "../components/CitySearch";
+import App from "../App";
 import { extractLocations, getEvents } from "../api";
 
 describe("<CitySearch /> component", () => {
@@ -12,7 +11,7 @@ describe("<CitySearch /> component", () => {
     expect(suggestionList).not.toBeInTheDocument();
   });
 
-  test("renders a list of suggestions when city textbox gains focus", async () => {
+  test("renders a list of suggestions when the city textbox gains focus", async () => {
     const { queryByRole } = render(<CitySearch />);
     const cityTextBox = queryByRole("textbox");
     await userEvent.click(cityTextBox);
@@ -28,14 +27,14 @@ describe("<CitySearch /> component", () => {
     expect(cityTextBox).toHaveClass("city");
   });
 
-  test("updates list of suggestions correctly when user types in city textbox", async () => {
+  test("updates the list of suggestions correctly when the user types in the city textbox", async () => {
     const allEvents = await getEvents();
     const allLocations = extractLocations(allEvents);
     const { queryByRole, rerender } = render(
       <CitySearch allLocations={allLocations} />
     );
 
-    // user types "Berlin" in city textbox
+    // user types "Berlin" in the city textbox
     const cityTextBox = queryByRole("textbox");
     await userEvent.type(cityTextBox, "Berlin");
 
@@ -55,6 +54,26 @@ describe("<CitySearch /> component", () => {
       expect(suggestionListItems[i].textContent).toBe(suggestions[i]);
     }
   });
+});
+
+describe("<CitySearch /> integration", () => {
+  test("renders suggestions list when the app is rendered.", async () => {
+    const user = userEvent.setup();
+    const AppComponent = render(<App />);
+    const AppDOM = AppComponent.container.firstChild;
+
+    const CitySearchDOM = AppDOM.querySelector("#city-search");
+    const cityTextBox = within(CitySearchDOM).queryByRole("textbox");
+    await user.click(cityTextBox);
+
+    const allEvents = await getEvents();
+    const allLocations = extractLocations(allEvents);
+
+    const suggestionListItems =
+      within(CitySearchDOM).queryAllByRole("listitem");
+    expect(suggestionListItems.length).toBe(allLocations.length + 1);
+  });
+
   // Add the new test for clicking on a suggestion
   test("renders the suggestion text in the textbox upon clicking on the suggestion", async () => {
     const allEvents = await getEvents();

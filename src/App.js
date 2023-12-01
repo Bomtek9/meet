@@ -1,28 +1,32 @@
 // src/App.js
-import { useEffect, useState } from "react";
+
 import CitySearch from "./components/CitySearch";
 import EventList from "./components/EventList";
 import NumberOfEvents from "./components/NumberOfEvents";
-import { getEvents } from "./api";
+import { useEffect, useState } from "react";
+import { extractLocations, getEvents } from "./api";
 
 import "./App.css";
+
 const App = () => {
   const [events, setEvents] = useState([]);
   const [currentNOE, setCurrentNOE] = useState(32);
+  const [allLocations, setAllLocations] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const allEvents = await getEvents();
-      setEvents(allEvents.slice(0, currentNOE));
-    };
+    fetchData();
+  }, []);
 
-    fetchData(); // Call fetchData when the component mounts or when currentNOE changes
-  }, [currentNOE]); // Include currentNOE as a dependency
+  const fetchData = async () => {
+    const allEvents = await getEvents();
+    setEvents(allEvents.slice(0, currentNOE));
+    setAllLocations(extractLocations(allEvents));
+  };
 
   return (
     <div className="App">
-      <CitySearch />
-      <NumberOfEvents setCurrentNOE={setCurrentNOE} />
+      <CitySearch allLocations={allLocations} />
+      <NumberOfEvents />
       <EventList events={events} />
     </div>
   );
