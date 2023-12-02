@@ -1,3 +1,5 @@
+// src/components/CitySearch.js
+
 import { useState, useEffect } from "react";
 
 const CitySearch = ({ allLocations, setCurrentCity }) => {
@@ -6,7 +8,6 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
   const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
-    // Set the initial state of suggestions when allLocations prop changes
     setSuggestions(allLocations);
   }, [`${allLocations}`]);
 
@@ -17,7 +18,6 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
           return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
         })
       : [];
-
     setQuery(value);
     setSuggestions(filteredLocations);
   };
@@ -39,7 +39,6 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
         onFocus={() => setShowSuggestions(true)}
         onChange={handleInputChanged}
       />
-
       {showSuggestions ? (
         <ul className="suggestions">
           {suggestions.map((suggestion) => {
