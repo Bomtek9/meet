@@ -2,8 +2,6 @@
 
 import Event from "./Event";
 
-// .map() loop that loops over the events prop, and in each iteration, renders an <Event /> component (which will internally render the <li></li>...
-
 const EventList = ({ events }) => {
   return (
     <ul id="event-list">

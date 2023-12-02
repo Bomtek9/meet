@@ -1,32 +1,32 @@
-import { render, screen } from "@testing-library/react";
+// src/__tests__/NumberOfEvents.test.js
+
+import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import NumberOfEvents from "../components/NumberOfEvents";
 
-describe("<NumberOfEvents /> Component", () => {
-  test("has the input textbox", () => {
-    render(
-      <NumberOfEvents setCurrentNOE={() => {}} setErrorAlert={() => {}} />
-    );
-    const input = screen.queryByRole("textbox");
-    expect(input).toBeInTheDocument();
+describe("<NumberOfEvents /> component", () => {
+  let NumberOfEventsComponent;
+  beforeEach(() => {
+    NumberOfEventsComponent = render(<NumberOfEvents />);
   });
 
-  test("default number of events is 32", () => {
-    render(
-      <NumberOfEvents setCurrentNOE={() => {}} setErrorAlert={() => {}} />
-    );
-    const input = screen.queryByRole("textbox");
-    expect(input).toHaveValue("32");
+  test("renders number of events text input", () => {
+    const numberTextBox = NumberOfEventsComponent.queryByRole("textbox");
+    expect(numberTextBox).toBeInTheDocument();
+    expect(numberTextBox).toHaveClass("number-of-events-input");
   });
 
-  test("updates number of events when user types", async () => {
-    render(
-      <NumberOfEvents setCurrentNOE={() => {}} setErrorAlert={() => {}} />
-    );
-    const input = screen.queryByRole("textbox");
-    await userEvent.type(input, "{backspace}{backspace}10");
-    expect(input).toHaveValue("10");
+  test("default number is 32", async () => {
+    const numberTextBox = NumberOfEventsComponent.queryByRole("textbox");
+    expect(numberTextBox).toHaveValue("32");
   });
 
-  // Add more tests as needed for your specific functionality
+  test("number of events text box value changes when the user types in it", async () => {
+    const user = userEvent.setup();
+    const numberTextBox = NumberOfEventsComponent.queryByRole("textbox");
+    await user.type(numberTextBox, "123");
+
+    // 32 (the default value already written) + 123
+    expect(numberTextBox).toHaveValue("32123");
+  });
 });

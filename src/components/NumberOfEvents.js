@@ -1,27 +1,23 @@
-import React from "react";
+// src/components/NumberOfEvents.js
 
-const NumberOfEvents = ({ setCurrentNOE, setErrorAlert }) => {
+import { useState } from "react";
+
+const NumberOfEvents = ({}) => {
+  const [number, setNumber] = useState(32);
+
   const handleInputChanged = (event) => {
     const value = event.target.value;
-    setCurrentNOE(value);
-    let errorText;
-    if (isNaN(value) || value <= 0) {
-      errorText = "Only positive numbers are valid.";
-      setErrorAlert(errorText);
-    } else {
-      errorText = "";
-      setErrorAlert(errorText);
-    }
+    setNumber(value);
   };
 
   return (
     <div id="number-of-events">
-      <p>Number of Events:</p>
+      <label htmlFor="number-of-events-input">Number of Events: </label>
       <input
-        data-testid="event-number-input"
         type="text"
-        className="event-number"
-        defaultValue="32"
+        id="number-of-events-input"
+        className="number-of-events-input"
+        value={number}
         onChange={handleInputChanged}
       />
     </div>
