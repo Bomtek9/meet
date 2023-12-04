@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 
-const NumberOfEvents = ({}) => {
+const NumberOfEvents = ({ setCurrentNOE, fetchData }) => {
   const [number, setNumber] = useState(32);
 
   const handleInputChanged = (event) => {
     const value = event.target.value;
     setNumber(value);
+    setCurrentNOE(value); // Set the current number of events
+    fetchData(); // Trigger data fetching
   };
 
   return (

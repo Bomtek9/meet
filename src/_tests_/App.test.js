@@ -1,6 +1,3 @@
-// src/__tests__/App.test.js
-// Clay
-
 import { render, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { getEvents } from "../api";
@@ -8,6 +5,7 @@ import App from "../App";
 
 describe("<App /> component", () => {
   let AppDOM;
+
   beforeEach(() => {
     AppDOM = render(<App />).container.firstChild;
   });

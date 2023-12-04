@@ -1,13 +1,22 @@
-// src/__tests__/NumberOfEvents.test.js
-
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import NumberOfEvents from "../components/NumberOfEvents";
 
 describe("<NumberOfEvents /> component", () => {
   let NumberOfEventsComponent;
+  let setCurrentNOEMock;
+  let fetchDataMock;
+
   beforeEach(() => {
-    NumberOfEventsComponent = render(<NumberOfEvents />);
+    setCurrentNOEMock = jest.fn();
+    fetchDataMock = jest.fn();
+
+    NumberOfEventsComponent = render(
+      <NumberOfEvents
+        setCurrentNOE={setCurrentNOEMock}
+        fetchData={fetchDataMock}
+      />
+    );
   });
 
   test("renders number of events text input", () => {
