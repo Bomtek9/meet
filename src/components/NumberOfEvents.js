@@ -19,6 +19,7 @@ const NumberOfEvents = ({ setCurrentNOE, fetchData }) => {
         type="text"
         id="number-of-events-input"
         className="number-of-events-input"
+        data-testid="number-of-events-input"
         value={number}
         onChange={handleInputChanged}
       />
