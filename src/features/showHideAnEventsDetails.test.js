@@ -1,3 +1,7 @@
+/**
+ * @jest -environment jsdom
+ */
+
 import { loadFeature, defineFeature } from "jest-cucumber";
 import { render, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -7,36 +11,36 @@ import App from "../App";
 const feature = loadFeature("./src/features/showHideAnEventsDetails.feature");
 
 defineFeature(feature, (test) => {
-  //SCENARIO 1
-  test("An event element is collapsed by default.", ({ given, when, then }) => {
+// SCENARIO 1
+test("An event element is collapsed by default.", ({ given, when, then }) => {
     let AppComponent;
+  
     given("the user first opens the app", () => {
       AppComponent = render(<App />);
     });
-
+  
     when(
-      "the user recieves the full list of events (specific for the city or all events)",
+      "the user receives the full list of events (specific for the city or all events)",
       async () => {
         const AppDOM = AppComponent.container.firstChild;
         const EventListDOM = AppDOM.querySelector("#event-list");
-
+  
         await waitFor(() => {
-          const EventListItems =
-            within(EventListDOM).queryAllByRole("listitem");
+          const EventListItems = within(EventListDOM).queryAllByRole("listitem");
           expect(EventListItems.length).toBe(32);
         });
       }
     );
-
+  
     then("all events will collapse by default.", () => {
       const EventDOM = AppComponent.container.firstChild;
       const details = EventDOM.querySelector(".details");
       expect(details).toBeNull();
     });
+  });
   
-
-  // SCENARIO 2
-  test("User can expand an event to see its details", ({
+// SCENARIO 2
+test("User can expand an event to see its details", ({
     given,
     when,
     then,
@@ -45,24 +49,25 @@ defineFeature(feature, (test) => {
     given("the user gets a list of events", async () => {
       AppComponent = render(<App />);
       const AppDOM = AppComponent.container.firstChild;
-
+  
       await waitFor(() => {
         const eventList = within(AppDOM).queryAllByRole("listitem");
         expect(eventList[0]).toBeTruthy();
       });
     });
-
+  
     when("a user selects an event's details", async () => {
       const button = AppComponent.queryAllByText("Show Details")[0];
-
+  
       await userEvent.click(button);
     });
-
-    then("the details will show up for that choosen event", () => {
+  
+    then("the details will show up for that chosen event", () => {
       const EventDOM = AppComponent.container.firstChild;
       const details = EventDOM.querySelector(".details");
       expect(details).toBeInTheDocument();
     });
+  });
  
 
 // SCENARIO 3
