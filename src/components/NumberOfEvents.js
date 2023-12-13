@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const NumberOfEvents = ({ setCurrentNOE, fetchData }) => {
+const NumberOfEvents = ({ setCurrentNOE, fetchData, setErrorAlert }) => {
   const [number, setNumber] = useState(32);
 
   const handleInputChanged = (event) => {
@@ -10,6 +10,16 @@ const NumberOfEvents = ({ setCurrentNOE, fetchData }) => {
     setNumber(value);
     setCurrentNOE(value); // Set the current number of events
     fetchData(); // Trigger data fetching
+
+    let infoText;
+    if (isNaN(value) || value <= 0) {
+      infoText = "Please enter a number greater than 0.";
+      setErrorAlert(infoText);
+    } else {
+      infoText = "";
+      setErrorAlert(infoText);
+      setCurrentNOE(value);
+    }
   };
 
   return (
