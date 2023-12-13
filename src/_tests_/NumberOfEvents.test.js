@@ -15,6 +15,7 @@ describe("<NumberOfEvents /> component", () => {
       <NumberOfEvents
         setCurrentNOE={setCurrentNOEMock}
         fetchData={fetchDataMock}
+        setErrorAlert={() => {}}
       />
     );
   });
