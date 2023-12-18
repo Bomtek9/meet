@@ -1,4 +1,5 @@
 import CitySearch from "./components/CitySearch";
+import CityEventsChart from "./components/CityEventsChart";
 import EventList from "./components/EventList";
 import NumberOfEvents from "./components/NumberOfEvents";
 import { useEffect, useState } from "react";
@@ -53,6 +54,7 @@ const App = () => {
         fetchData={fetchData}
         setErrorAlert={setErrorAlert}
       />
+      <CityEventsChart allLocations={allLocations} events={events} />
       <EventList events={events} />
     </div>
   );
