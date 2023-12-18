@@ -93,9 +93,9 @@ input[type="number"] {
   border-radius: 4px;
   outline: none;
   cursor: pointer;
-  border: #3620b5;
-  background-color: #3620b5;
-  color: #f3f03a;
+  border: 	#17235b;
+  background-color: 	#17235b;
+  color: 	#ffc633;
   font-weight: 600;
   font-family: "Roboto Mono", monospace;
 }
