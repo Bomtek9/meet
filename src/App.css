@@ -21,7 +21,7 @@ ul {
 }
 
 p {
-  margin: 5px 0;
+  margin: 10px 0;
 }
 
 input[type="text"],
@@ -107,4 +107,3 @@ input[type="number"] {
   width: 250px;
   z-index: 1000;
 }
-
