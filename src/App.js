@@ -1,5 +1,6 @@
 import CitySearch from "./components/CitySearch";
 import CityEventsChart from "./components/CityEventsChart";
+import EventGenreChart from "./components/EventGenresChart";
 import EventList from "./components/EventList";
 import NumberOfEvents from "./components/NumberOfEvents";
 import { useEffect, useState } from "react";
@@ -54,7 +55,11 @@ const App = () => {
         fetchData={fetchData}
         setErrorAlert={setErrorAlert}
       />
-      <CityEventsChart allLocations={allLocations} events={events} />
+      <div className="charts-container">
+        <CityEventsChart allLocations={allLocations} events={events} />
+        <EventGenreChart events={events} />
+        {/* Charts have been added to show data visualization. */}
+      </div>
       <EventList events={events} />
     </div>
   );
