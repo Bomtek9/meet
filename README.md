@@ -1,77 +1,52 @@
-Key Features:
+# Meet App 📍
 
-Filter Events by City
-Toggle Event Information
-Dictate Event Quantity
-Offline Functionality
-App Shortcut Addition to Home
-Visual Charts of Event Statistics
+## Objective
 
-Feature: Filter Events By City
+To build a serverless, progressive web application (PWA) with React using a test-driven development (TDD) technique. The application uses the Google Calendar API to fetch upcoming events.
+Serverless
 
-Scenario: When user hasn't searched for a city, show upcoming events from all cities. Given user hasn't searched for any city When the user opens the app Then the user should see the list of all upcoming events.
+Going serverless for this project will help it be set up faster, saving a lot of time, as well as enabling it to easily scale in the future, if necessary. My serverless functions implementation will be made using AWS Lambda, in combination with an external Google Calendar API, and will also handle the OAuth verification.
 
-Scenario: User should see a list of suggestions when they search for a city. Given the main page is open When user starts typing in the city textbox Then the user should receive a list of cities (suggestions) that match what they’ve typed
+## Key Features:
 
-Scenario: User can select a city from the suggested list. Given user was typing “Berlin” in the city textbox And the list of suggested cities is showing When the user selects a city (e.g., “Berlin, Germany”) from the list Then their city should be changed to that city (i.e., “Berlin, Germany”) And the user should receive a list of upcoming events in that city
+● Filter Events by City.
+● Show/Hide Event Details.
+● Specify Number of Events.
+● Use the App When Offline.
+● Add an App Shortcut to the Home Screen.
+● Display Charts Visualizing Event Details.
 
-Feature: Show/Hide Event Details
+## Technologies:
 
-Scenario: Initially, the event details are hidden. Given the user is viewing the list of events When no action is taken on an event Then the event details should be hidden by default
+● AWS
+● React
+● TDD technique
+● Google Calendar API
 
-Scenario: User can expand an event to view its details. Given the user is viewing the list of events When the user clicks on the "Show Details" button of an event Then the detailed information about the event should be displayed
+## live app link: https://bomtek9.github.io/meet/
 
-Scenario: User can collapse an event to hide its details. Given the user has expanded an event to view its details When the user clicks on the "Hide Details" button of the event Then the event details should be hidden again
+## Features and User Stories
 
-Feature: Specify Number of Events
+FEATURE 1: FILTER EVENTS BY CITY As a user, I should be able to filter events by city, so that I can see the events happening in the city I am interested in.
 
-Scenario: When a user hasn't set a number of events to display, show all events
-Given user hasn't filtered events by a city When the user is on the home page of events Then a total number of events should be shown
+-Given user wanted to filter events by city when the user starts typing in the search bar Then the user should see a list of city suggestions that match what they’ve typed
 
-Scenario: When a user has set number of events to display
-Given the user is on the home page of events When the user sets a number in the number of events text box Then the user should see a that number of events in the list
+FEATURE 2: SHOW/HIDE AN EVENT'S DETAILS As a user, I should be able to show/hide event details, so that I can see more details about an event that interests me.
 
-Feature: Use the App When Offline
+-Given the user sees a list of events in the app When the user clicks on the more infos button Then the user will be able to see more details about a specific event.
 
-Scenario: View cached events when offline
-Given I am offline
-When I visit the events page
-Then I should see the events that were last cached
+FEATURE 3: SPECIFY NUMBER OF EVENTS .As a user, I should be able to specify the number of events I want to view in the app, so that I can see more or fewer events on my list.
 
-Scenario: Show error for search setting changes when offline
-Given I am offline
-When I change the search settings
-Then I should see an error message
+-Given user wanted to specify the number of events they see on the app at once When user selects the said number of events Then the users app shows them the correct amount of events.
 
-Feature: Add an App Shortcut to the Home Screen
+FEATURE 4: USE THE APP WHEN OFFLINE As a user, I should be able to use my app when its offline, so that I can still access the events I was viewing last time I was online.
 
-Scenario: Add app shortcut to home screen
-Given I am on the homepage of the app
-When I choose to add the app to the home screen
-Then a shortcut of the app should be added to my device's home screen
+-Given the user doesnt currently have an internet connection When the user opens the app Then the user sees and can navigate through the events they saw last time they were online.
 
-Feature: Display Charts Visualizing Event Details
+FEATURE 5: ADD AN APP SHORTCUT TO THE HOME SCREEN As a user, I should be able to add my apps shortcut to my home screen, so that I can open the app faster.
 
-Scenario: Display a chart of events by city
-Given I am on the events page
-When I look at the events visualization section
-Then I should see a chart showing the number of upcoming events in each city
+-Given the user wanted to open their app faster When the user adds the app shortcut to their home screen Then they can access it more easily.
 
-Technical Mandates
-Framed in React
-Strict adherence to TDD
-Google Calendar API with OAuth2
-Serverless function calls (preferably AWS Lambda)
-GitHub hosting
-Full compatibility, inclusive of IE11
-Adaptive design (ranging from 1920px to 320px)
-Achieves PWA standards as per Lighthouse
-Service workers ensure offline functionality
-Deployment via GitHub Pages
-Object-Oriented Programming (OOP) for alerts
-Data visualization tools integrated
-Aiming for ≥ 90% test coverage
-Performance monitoring via online tools
+FEATURE 6: DISPLAY CHARTS VISUALIZING EVENT DETAILS As a user, I should be able to display charts visualizing event details, so that I have more precise information about the events.
 
-Serverless functions
-In the Meet app, serverless functions will play a crucial role in handling authorization for accessing public calendar events from the Google Calendar API. Users need to be authorized to retrieve event data for rendering in the React app. This authorization is facilitated by serverless functions, which are a more efficient alternative to building and maintaining a full server for this purpose. In this context, serverless functions will generate and provide access tokens, ensuring secure access to the Google Calendar API. AWS Lambda will be the chosen cloud-service provider for implementing these serverless functions, making the app's architecture more scalable and cost-effective.
+-Given the users open the app When users selects chart view Then the user will have information on what events are happening in which city.
